@@ -5,8 +5,29 @@
     <link href="style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
+    <button id="show">Show all user</button>
+    <div id="users"></div>
       <!-- Your site content here -->
       <script src="jquery-3.3.1.min.js"></script>
       <script src="script.js"></script>
+      <script>
+        $('#show').click(function(){
+          $.ajax({
+            method:"GET",
+            url: "http://skeleton.mernbook.com/api/users"
+          }).done(function(response){
+            console.log("Done")
+            console.log(response)
+            for(var i=0;i<response.length;i++){
+              var name = $('<p>').text(response[i].name)
+              $('#users').append(name)
+            }
+          }).fail(function(response){
+            console.log("failed")
+            console.log(response)
+          })
+
+        })
+      </script>
   </body>
 </html>
